@@ -11,12 +11,6 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             min-height: 100vh;
             display: flex;
@@ -36,9 +30,10 @@
             text-align: center;
             padding: 55px 40px;
             border-radius: 24px;
-            border: 1px solid #315440;
-            background: linear-gradient(145deg, #153526, #0b1e14);
-            box-shadow: 0 25px 70px #00000060;
+            border: 1px solid #ffffff;
+            background: #ffffffd9;
+            box-shadow: 0 25px 70px #8061d930;
+            backdrop-filter: blur(15px);
             animation: appear 0.7s ease;
         }
 
@@ -49,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #24b875, #ff9638);
+            background: linear-gradient(90deg, #8061d9, #58a9ec, #e66acb);
         }
 
         @keyframes appear {
@@ -66,9 +61,9 @@
 
         .success-label {
             display: inline-block;
-            color: #48dc91;
-            background: #1e9b6220;
-            border: 1px solid #1e9b6250;
+            color: #7652c6;
+            background: #eee7ff;
+            border: 1px solid #d9cafa;
             padding: 8px 17px;
             border-radius: 30px;
             font-size: 12px;
@@ -85,10 +80,10 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: linear-gradient(145deg, #1e9b62, #105c3a);
-            border: 5px solid #42d68b40;
-            box-shadow: 0 0 35px #42d68b30;
-            color: white;
+            background: linear-gradient(145deg, #d8c7ff, #b9d9ff);
+            border: 5px solid #ffffff;
+            box-shadow: 0 0 30px #9474e440;
+            color: #7754ca;
             font-size: 48px;
             animation: pop 0.6s ease;
         }
@@ -110,31 +105,31 @@
         .success-card h1 {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 30px;
-            color: #f2f7f3;
+            color: #30264f;
             margin-bottom: 15px;
         }
 
         .success-card h1 span {
-            color: #ff9638;
+            color: #9062dc;
         }
 
         .description {
-            color: #b3c5b9;
+            color: #77718e;
             font-size: 14px;
             line-height: 1.8;
             margin-bottom: 30px;
         }
 
         .ticket-box {
-            background: linear-gradient(120deg, #183c2a, #26341e);
-            border: 1px solid #49724e;
+            background: linear-gradient(120deg, #f0eaff, #e8f0ff);
+            border: 1px solid #d9cafa;
             border-radius: 15px;
             padding: 24px 15px;
             margin-bottom: 25px;
         }
 
         .ticket-heading {
-            color: #a6b8ad;
+            color: #77718e;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 1.5px;
@@ -142,7 +137,7 @@
         }
 
         .ticket-id {
-            color: #ffab50;
+            color: #8059d2;
             font-size: 24px;
             font-weight: 800;
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -150,14 +145,14 @@
         }
 
         .email-message {
-            color: #49d992;
+            color: #547eaa;
             font-size: 14px;
             line-height: 1.7;
             margin: 20px 0 30px;
         }
 
         .email-message.failed {
-            color: #ffad55;
+            color: #c36a4c;
         }
 
         .home-button {
@@ -165,7 +160,7 @@
             text-decoration: none;
             padding: 15px 35px;
             border-radius: 10px;
-            background: linear-gradient(100deg, #168d55, #e9822d);
+            background: linear-gradient(100deg, #8061d9, #d75dbb);
             color: white;
             font-size: 14px;
             font-weight: 700;
@@ -174,11 +169,11 @@
 
         .home-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px #168d5550;
+            box-shadow: 0 10px 25px #8061d950;
         }
 
         .footer-text {
-            color: #81978a;
+            color: #9690ae;
             font-size: 12px;
             margin-top: 30px;
         }
@@ -203,7 +198,6 @@
             }
         }
     </style>
-
 </head>
 
 <body>
@@ -259,7 +253,6 @@
         </div>
 
     </div>
-
 
     <script>
 
