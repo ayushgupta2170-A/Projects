@@ -1,74 +1,56 @@
 
 const form = document.getElementById("registrationForm");
 const message = document.getElementById("message");
-const button = document.getElementById("submitButton");
+const submitButton = document.getElementById("submitButton");
 
-form.addEventListener("submit", async function (e) {
+form.addEventListener("submit", async (e) => {
+e.preventDefault();
 
-    e.preventDefault();
+message.textContent = "";
+message.style.color = "#dc2626";
 
-    button.disabled = true;
-    button.querySelector("span").textContent = "Submitting...";
-    message.textContent = "";
-    message.style.color = "#dc2626";
+const buttonText = submitButton.querySelector("span");
+buttonText.textContent = "Submitting...";
+submitButton.disabled = true;
 
-    const data = {
-        name: document.getElementById("name").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        studentNumber: document.getElementById("studentNumber").value.trim(),
-        universityRollNumber: document.getElementById("universityRollNumber").value.trim(),
-        year: document.getElementById("year").value,
-        branch: document.getElementById("branch").value,
-        domainOfInterest: document.getElementById("domainOfInterest").value.trim(),
-        collegeOrganization: document.getElementById("collegeOrganization").value.trim(),
-        consent: document.getElementById("consent").checked
-    };
+const data = {
+name: document.getElementById("name").value.trim(),
+email: document.getElementById("email").value.trim(),
+phone: document.getElementById("phone").value.trim(),
+studentNumber: document.getElementById("studentNumber").value.trim(),
+universityRollNumber: document.getElementById("universityRollNumber").value.trim(),
+year: document.getElementById("year").value,
+branch: document.getElementById("branch").value,
+domainOfInterest: document.getElementById("domainOfInterest").value.trim(),
+collegeOrganization: document.getElementById("collegeOrganization").value.trim(),
+consent: document.getElementById("consent").checked
+};
 
-    try {
+try {
+const response = await fetch("http://localhost:5000/api/registrations", {
+method: "POST",
+headers: {"Content-Type": "application/json"},
+body: JSON.stringify(data)
+});
 
-        const response = await fetch("http://localhost:5000/api/registrations", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
+const result = await response.json();
 
-        const result = await response.json();
+if (response.ok && result.success) {
+window.location.href = `success.html?ticketId=${encodeURIComponent(result.ticketId)}&emailStatus=${encodeURIComponent(result.emailStatus)}`;
+return;
+}
 
-        if (result.success) {
+if (result.errors) {
+const errorMessages = Object.values(result.errors);
+message.textContent = errorMessages.join(" ");
+} else {
+message.textContent = result.message || "Registration could not be completed. Please try again.";
+}
 
-            window.location.href =
-                "success.html?ticketId=" +
-                encodeURIComponent(result.ticketId) +
-                "&emailStatus=" +
-                encodeURIComponent(result.emailStatus);
+} catch (error) {
+message.textContent = "Unable to connect to the server. Please try again later.";
+}
 
-            return;
-        }
-
-        // Show all validation errors
-        if (result.errors) {
-
-            const errorList = Object.values(result.errors);
-
-            message.textContent = errorList.join(" | ");
-
-        } else {
-
-            message.textContent =
-                result.message || "Registration failed. Please try again.";
-        }
-
-    } catch (error) {
-
-        message.textContent =
-            "Unable to connect to server. Please try again.";
-
-    }
-
-    button.disabled = false;
-    button.querySelector("span").textContent = "Submit Registration";
-
+submitButton.disabled = false;
+buttonText.textContent = "Submit Registration";
 });

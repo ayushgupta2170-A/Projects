@@ -1,114 +1,70 @@
 
-const validateRegistration = (data) => {
+const validateRegistration = (body) => {
+const errors = {};
+const data = {};
 
-    const errors = {};
+const name = (body.name || "").trim();
+const email = (body.email || "").trim().toLowerCase();
+const phone = (body.phone || "").trim();
+const studentNumber = (body.studentNumber || "").trim();
+const universityRollNumber = (body.universityRollNumber || "").trim();
+const year = (body.year || "").trim();
+const branch = (body.branch || "").trim();
+const domainOfInterest = (body.domainOfInterest || "").trim();
+const collegeOrganization = (body.collegeOrganization || "").trim();
 
-    // Full Name: Only alphabets and spaces
-    if (!data.name || !/^[A-Za-z ]+$/.test(data.name.trim())) {
-        errors.name = "Name mein sirf alphabets use karo.";
-    } else if (data.name.trim().length < 2) {
-        errors.name = "Name kam se kam 2 characters ka hona chahiye.";
-    }
+if (!name) errors.name = "Name is required.";
+else if (name.length < 2 || !/^[A-Za-z ]+$/.test(name))
+errors.name = "Please enter a valid name using letters only.";
 
-    // Email validation
-    const email = (data.email || "").trim().toLowerCase();
+if (!email) errors.email = "Email address is required.";
+else if (!/^[a-zA-Z0-9._%+-]+@(gmail\.com|akgec\.ac\.in)$/i.test(email))
+errors.email = "Please enter a valid Gmail or AKGEC email address.";
 
-    if (!email) {
-        errors.email = "Email address required hai.";
-    } else if (!/^[^\s@]+@(gmail\.com|akgec\.ac\.in)$/i.test(email)) {
-        errors.email = "Sirf Gmail ya AKGEC email use karo.";
-    }
+if (!phone) errors.phone = "Phone number is required.";
+else if (!/^(?:\+91[- ]?)?[6-9]\d{9}$/.test(phone))
+errors.phone = "Please enter a valid 10-digit mobile number.";
 
-    // Phone Number
-    const phone = (data.phone || "").trim();
+if (!studentNumber) errors.studentNumber = "Student number is required.";
+else if (!/^\d{7}$/.test(studentNumber))
+errors.studentNumber = "Student number must contain exactly 7 digits.";
 
-    if (!/^(?:\+91)?[6-9]\d{9}$/.test(phone)) {
-        errors.phone = "Valid 10-digit Indian mobile number enter karo.";
-    }
+if (!universityRollNumber) errors.universityRollNumber = "University roll number is required.";
+else if (!/^\d{13}$/.test(universityRollNumber))
+errors.universityRollNumber = "University roll number must contain exactly 13 digits.";
 
-    // Student Number: Exactly 7 digits
-    const studentNumber = (data.studentNumber || "").trim();
+if (!["2nd Year","3rd Year","4th Year"].includes(year))
+errors.year = "Please select a valid academic year.";
 
-    if (!/^\d{7}$/.test(studentNumber)) {
-        errors.studentNumber = "Student Number exactly 7 digits ka hona chahiye.";
-    }
+const branches = ["CS","CSE","CSE-AIML","CSIT","IT","CSE-DS","AIML","Civil","Mechanical","ECE","CSE Hindi"];
 
-    // University Roll Number: Exactly 13 digits
-    const universityRollNumber = (data.universityRollNumber || "").trim();
+if (!branches.includes(branch))
+errors.branch = "Please select a valid branch.";
 
-    if (!/^\d{13}$/.test(universityRollNumber)) {
-        errors.universityRollNumber = "University Roll Number exactly 13 digits ka hona chahiye.";
-    }
+if (domainOfInterest.length > 100)
+errors.domainOfInterest = "Domain of interest cannot exceed 100 characters.";
 
-    // Year validation
-    const validYears = ["2nd Year", "3rd Year", "4th Year"];
+if (collegeOrganization.length > 150)
+errors.collegeOrganization = "College/Organization name cannot exceed 150 characters.";
 
-    if (!validYears.includes(data.year)) {
-        errors.year = "Please select a valid year.";
-    }
+if (body.consent !== true && body.consent !== "true")
+errors.consent = "Please accept the terms and conditions.";
 
-    // Branch validation
-    const validBranches = [
-        "CS",
-        "CSE",
-        "CSE-AIML",
-        "CSIT",
-        "IT",
-        "CSE-DS",
-        "AIML",
-        "Civil",
-        "Mechanical",
-        "ECE",
-        "CSE Hindi"
-    ];
+if (Object.keys(errors).length > 0)
+return { valid: false, errors };
 
-    if (!validBranches.includes(data.branch)) {
-        errors.branch = "Please select a valid branch.";
-    }
+data.name = name;
+data.email = email;
+data.phone = phone;
+data.studentNumber = studentNumber;
+data.universityRollNumber = universityRollNumber;
+data.year = year;
+data.branch = branch;
+data.domainOfInterest = domainOfInterest;
+data.collegeOrganization = collegeOrganization;
+data.consent = true;
 
-    // Domain validation
-    const domain = (data.domainOfInterest || "").trim();
-
-    if (domain.length > 100) {
-        errors.domainOfInterest = "Domain name bahut lamba hai.";
-    }
-
-    // College validation
-    const college = (data.collegeOrganization || "").trim();
-
-    if (college.length > 150) {
-        errors.collegeOrganization = "College name bahut lamba hai.";
-    }
-
-    // Consent validation
-    if (data.consent !== true) {
-        errors.consent = "Please accept the consent.";
-    }
-
-    // Return validation result
-    if (Object.keys(errors).length > 0) {
-        return {
-            valid: false,
-            errors
-        };
-    }
-
-    return {
-        valid: true,
-
-        data: {
-            name: data.name.trim(),
-            email,
-            phone,
-            studentNumber,
-            universityRollNumber,
-            year: data.year,
-            branch: data.branch,
-            domainOfInterest: domain,
-            collegeOrganization: college,
-            consent: true
-        }
-    };
+return { valid: true, data };
 };
 
 module.exports = validateRegistration;
