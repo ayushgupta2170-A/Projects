@@ -20,13 +20,20 @@ const app=express();
 
 app.use(helmet());
 
+const allowedOrigins=[
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
     origin:function(origin,callback){
-        if(!origin || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)){
-            callback(null,true);
-        }else{
-            callback(new Error("Not allowed by CORS"));
+        if(!origin||allowedOrigins.includes(origin)){
+            return callback(null,true);
         }
+        return callback(new Error("Not allowed by CORS"));
     }
 }));
 
@@ -34,9 +41,19 @@ app.use(express.json({limit:"10kb"}));
 
 const registrationLimit=rateLimit({
     windowMs:15*60*1000,
-    max:10
+    max:10,
+    message:{
+        success:false,
+        message:"Too many registration attempts. Please try again later."
+    }
 });
 
+// Home route
+app.get("/",(req,res)=>{
+    res.status(200).send("EventHub Registration Server is Running!");
+});
+
+// Health check
 app.get("/api/health",(req,res)=>{
     res.status(200).json({
         success:true,
@@ -44,6 +61,7 @@ app.get("/api/health",(req,res)=>{
     });
 });
 
+// Registration API
 app.post("/api/registrations",registrationLimit,async(req,res)=>{
     try{
         const result=validateRegistration(req.body);
@@ -57,7 +75,6 @@ app.post("/api/registrations",registrationLimit,async(req,res)=>{
         }
 
         const ticketId="REG-"+crypto.randomBytes(8).toString("hex").toUpperCase();
-
         const qrBuffer=await QRCode.toBuffer(ticketId);
 
         const registration=new Registration({
@@ -113,7 +130,7 @@ app.post("/api/registrations",registrationLimit,async(req,res)=>{
             });
         }
 
-        console.error("REGISTRATION ERROR:",error.message);
+        console.error("REGISTRATION ERROR:",error);
 
         return res.status(500).json({
             success:false,
@@ -122,6 +139,15 @@ app.post("/api/registrations",registrationLimit,async(req,res)=>{
     }
 });
 
+// Invalid route
+app.use((req,res)=>{
+    res.status(404).json({
+        success:false,
+        message:"Route not found"
+    });
+});
+
+// Server start
 const PORT=process.env.PORT||5000;
 
 const startServer=async()=>{
@@ -131,12 +157,12 @@ const startServer=async()=>{
 
         console.log("Registration Model Indexes Ready");
 
-        app.listen(PORT,()=>{
+        app.listen(PORT,"0.0.0.0",()=>{
             console.log(`Server running on port ${PORT}`);
         });
 
     }catch(error){
-        console.error("SERVER ERROR:",error.message);
+        console.error("SERVER ERROR:",error);
         process.exit(1);
     }
 };
