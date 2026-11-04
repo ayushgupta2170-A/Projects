@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventHub | Registration Form</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Animated Background Grid -->
+    <div class="background-grid"></div>
+
+    <div class="container">
+
+        <!-- Navbar -->
+        <nav>
+            <div class="brand">
+                Event<span>Hub.</span>
+            </div>
+
+            <div class="status">
+                ● Registration Open
+            </div>
+        </nav>
+
+
+        <!-- Intro Section -->
+        <section class="intro">
+
+            <h1>
+                Your Next Big Opportunity
+                <span>Starts Here.</span>
+            </h1>
+
+            <p class="subtitle">
+                Join us, connect with amazing people and be a part of something exciting.
+                Complete the registration form below to reserve your entry.
+            </p>
+
+        </section>
+
+
+        <!-- Registration Form Card -->
+        <div class="form-card">
+
+            <h2>Registration Form</h2>
+
+            <p>Enter your details to reserve your entry.</p>
+
+
+            <form id="registrationForm">
+
+                <div class="form-grid">
+
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label for="name">
+                            Full Name <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            required
+                            minlength="2"
+                        >
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">
+                            Email Address <span>*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="example@gmail.com"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="phone">
+                            Phone Number <span>*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="10-digit number"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Student Number -->
+                    <div class="form-group">
+                        <label for="studentNumber">
+                            Student Number <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentNumber"
+                            name="studentNumber"
+                            placeholder="7-digit number"
+                            maxlength="7"
+                            inputmode="numeric"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- University Roll Number -->
+                    <div class="form-group">
+                        <label for="universityRollNumber">
+                            University Roll Number <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="universityRollNumber"
+                            name="universityRollNumber"
+                            placeholder="13-digit roll number"
+                            maxlength="13"
+                            inputmode="numeric"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Year -->
+                    <div class="form-group">
+                        <label for="year">
+                            Current Year <span>*</span>
+                        </label>
+
+                        <select id="year" name="year" required>
+                            <option value="">Select your year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Branch -->
+                    <div class="form-group">
+                        <label for="branch">
+                            Branch <span>*</span>
+                        </label>
+
+                        <select id="branch" name="branch" required>
+                            <option value="">Select your branch</option>
+                            <option value="CS">CS</option>
+                            <option value="CSE">CSE</option>
+                            <option value="CSE-AIML">CSE-AIML</option>
+                            <option value="CSIT">CSIT</option>
+                            <option value="IT">IT</option>
+                            <option value="CSE-DS">CSE-DS</option>
+                            <option value="AIML">AIML</option>
+                            <option value="Civil">Civil</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="ECE">ECE</option>
+                            <option value="CSE Hindi">CSE Hindi</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Domain -->
+                    <div class="form-group">
+                        <label for="domainOfInterest">
+                            Domain of Interest
+                        </label>
+
+                        <select
+                            id="domainOfInterest"
+                            name="domainOfInterest"
+                        >
+                            <option value="">Select your interest</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="App Development">App Development</option>
+                            <option value="AI/ML">AI/ML</option>
+                            <option value="Cyber Security">Cyber Security</option>
+                            <option value="Cloud Computing">Cloud Computing</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Competitive Programming">Competitive Programming</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+
+                    <!-- College / Organization -->
+                    <div class="form-group">
+                        <label for="collegeOrganization">
+                            College / Organization
+                        </label>
+
+                        <input
+                            type="text"
+                            id="collegeOrganization"
+                            name="collegeOrganization"
+                            placeholder="Enter college or organization name"
+                        >
+                    </div>
+
+                </div>
+
+
+                <!-- Consent -->
+                <div class="consent">
+
+                    <input
+                        type="checkbox"
+                        id="consent"
+                        name="consent"
+                        required
+                    >
+
+                    <label for="consent">
+                        I confirm that the information provided above is correct.
+                    </label>
+
+                </div>
+
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitButton">
+                    <span>Submit Registration</span>
+                    <span> →</span>
+                </button>
+
+
+                <!-- Message -->
+                <div id="message"></div>
+
+            </form>
+
+        </div>
+
+
+        <!-- Footer -->
+        <footer>
+            © 2026 EventHub. All rights reserved.
+        </footer>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="form.js"></script>
+
+</body>
+</html>

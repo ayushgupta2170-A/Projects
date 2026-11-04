@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registration Successful | EventHub</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 15px;
+        }
+
+        .success-wrapper {
+            width: 100%;
+            max-width: 650px;
+        }
+
+        .success-card {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 55px 40px;
+            border-radius: 24px;
+            border: 1px solid #ffffff;
+            background: #ffffffd9;
+            box-shadow: 0 25px 70px #8061d930;
+            backdrop-filter: blur(15px);
+            animation: appear 0.7s ease;
+        }
+
+        .success-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #8061d9, #58a9ec, #e66acb);
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-label {
+            display: inline-block;
+            color: #7652c6;
+            background: #eee7ff;
+            border: 1px solid #d9cafa;
+            padding: 8px 17px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 28px;
+        }
+
+        .check-circle {
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #d8c7ff, #b9d9ff);
+            border: 5px solid #ffffff;
+            box-shadow: 0 0 30px #9474e440;
+            color: #7754ca;
+            font-size: 48px;
+            animation: pop 0.6s ease;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.5);
+            }
+
+            70% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .success-card h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 30px;
+            color: #30264f;
+            margin-bottom: 15px;
+        }
+
+        .success-card h1 span {
+            color: #9062dc;
+        }
+
+        .description {
+            color: #77718e;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .ticket-box {
+            background: linear-gradient(120deg, #f0eaff, #e8f0ff);
+            border: 1px solid #d9cafa;
+            border-radius: 15px;
+            padding: 24px 15px;
+            margin-bottom: 25px;
+        }
+
+        .ticket-heading {
+            color: #77718e;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .ticket-id {
+            color: #8059d2;
+            font-size: 24px;
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-wrap: anywhere;
+        }
+
+        .email-message {
+            color: #547eaa;
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 20px 0 30px;
+        }
+
+        .email-message.failed {
+            color: #c36a4c;
+        }
+
+        .home-button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 10px;
+            background: linear-gradient(100deg, #8061d9, #d75dbb);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px #8061d950;
+        }
+
+        .footer-text {
+            color: #9690ae;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 500px) {
+            .success-card {
+                padding: 40px 20px;
+            }
+
+            .success-card h1 {
+                font-size: 25px;
+            }
+
+            .ticket-id {
+                font-size: 19px;
+            }
+
+            .check-circle {
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-grid"></div>
+
+    <div class="success-wrapper">
+
+        <div class="success-card">
+
+            <div class="success-label">
+                REGISTRATION COMPLETED
+            </div>
+
+            <div class="check-circle">
+                ✓
+            </div>
+
+            <h1>
+                Registration <span>Successful!</span>
+            </h1>
+
+            <p class="description">
+                Thank you for registering. Your registration has been
+                successfully completed. We look forward to seeing you
+                at the event!
+            </p>
+
+            <div class="ticket-box">
+
+                <div class="ticket-heading">
+                    YOUR REGISTRATION TICKET ID
+                </div>
+
+                <div class="ticket-id" id="ticketId">
+                    Loading...
+                </div>
+
+            </div>
+
+            <p class="email-message" id="emailMessage">
+                Your QR entry pass has been sent to your registered email address.
+            </p>
+
+            <a href="index.html" class="home-button">
+                ← Back to Home
+            </a>
+
+            <div class="footer-text">
+                © 2026 EventHub. All rights reserved.
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const params = new URLSearchParams(window.location.search);
+
+        const ticketId = params.get("ticketId");
+        const emailStatus = params.get("emailStatus");
+
+        const ticketElement = document.getElementById("ticketId");
+        const emailMessage = document.getElementById("emailMessage");
+
+        ticketElement.textContent = ticketId || "Ticket ID not found";
+
+        if (emailStatus === "sent") {
+
+            emailMessage.textContent =
+                "✓ Your QR entry pass has been sent to your registered email address.";
+
+        } else if (emailStatus === "failed") {
+
+            emailMessage.textContent =
+                "Your registration is saved, but we could not send the QR email. Please contact the registration team.";
+
+            emailMessage.classList.add("failed");
+
+        } else {
+
+            emailMessage.textContent =
+                "Your registration status could not be verified. Please contact the registration team.";
+
+            emailMessage.classList.add("failed");
+
+        }
+
+    </script>
+
+</body>
+</html>
