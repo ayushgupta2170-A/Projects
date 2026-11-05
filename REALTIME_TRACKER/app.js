@@ -18,8 +18,7 @@ io.on("connection",function(socket){
 
     socket.on("send-location",function(data){
         io.emit("receive-location",{id:socket.id,latitude:data.latitude,longitude:data.longitude}); 
-        // Mistake 1: recieve-locaton ki spelling galat thi.
-        // Mistake 2: latitude aur longitude bhi send karna zaroori hai.
+        
     });
 
     socket.on("disconnect",function(){

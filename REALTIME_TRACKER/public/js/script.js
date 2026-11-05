@@ -30,11 +30,9 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 const markers={}; 
 
-socket.on("receive-location",(data)=>{  // Mistake 1: recieve ki spelling galat thi
-    const {id,latitude,longitude}=data;
+socket.on("receive-location",(data)=>{  
 
-    map.setView([latitude,longitude],16);  // Mistake 2: Map ki jagah map aur longitude missing tha
-
+    map.setView([latitude,longitude],16);  
     if(markers[id]){
         markers[id].setLatLng([latitude,longitude]);
     }else{
