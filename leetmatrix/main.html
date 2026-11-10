@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode Tracker</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <main class="tracker-card">
+        <header class="header">
+            <h1>LeetCode <span>Tracker</span> 🚀</h1>
+            <p>Enter your username to see your progress</p>
+        </header>
+
+        <form id="search-form" class="search-box">
+            <input 
+                type="text" 
+                id="user-input" 
+                placeholder="Enter LeetCode username..." 
+                autocomplete="off"
+            >
+            <button type="submit" id="search-btn">
+                <span>Search</span>
+            </button>
+        </form>
+
+        <p id="error-message" class="error-text" role="alert"></p>
+
+        <!-- Stats Section -->
+        <section class="stats-container">
+            <div class="progress-grid">
+                <div class="circle easy-circle">
+                    <div class="circle-content">
+                        <span id="easy-label">0/0</span>
+                        <small>Easy</small>
+                    </div>
+                </div>
+
+                <div class="circle medium-circle">
+                    <div class="circle-content">
+                        <span id="medium-label">0/0</span>
+                        <small>Medium</small>
+                    </div>
+                </div>
+
+                <div class="circle hard-circle">
+                    <div class="circle-content">
+                        <span id="hard-label">0/0</span>
+                        <small>Hard</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beat % Cards -->
+            <div class="stats-card"></div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
